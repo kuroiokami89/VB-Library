@@ -1,0 +1,14 @@
+C:\Users\sergi\Downloads\Library\LibApp\bin\Debug\net9.0\LibApp.exe
+C:\Users\sergi\Downloads\Library\LibApp\bin\Debug\net9.0\LibApp.deps.json
+C:\Users\sergi\Downloads\Library\LibApp\bin\Debug\net9.0\LibApp.runtimeconfig.json
+C:\Users\sergi\Downloads\Library\LibApp\bin\Debug\net9.0\LibApp.dll
+C:\Users\sergi\Downloads\Library\LibApp\bin\Debug\net9.0\LibApp.pdb
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.AssemblyInfoInputs.cache
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.AssemblyInfo.cs
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.csproj.CoreCompileInputs.cache
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.dll
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\refint\LibApp.dll
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.pdb
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.genruntimeconfig.cache
+C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\ref\LibApp.dll
