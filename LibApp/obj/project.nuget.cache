@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AFtiy1oYiu0=",
+  "dgSpecHash": "nLAbxcekNAc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\sergi\\Downloads\\Library\\LibApp\\LibApp.csproj",
+  "projectFilePath": "D:\\Current Projects\\C#\\VB-Library\\LibApp\\LibApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sergi\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.11\\microsoft.netcore.app.ref.9.0.11.nupkg.sha512",
     "C:\\Users\\sergi\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.11\\microsoft.windowsdesktop.app.ref.9.0.11.nupkg.sha512",

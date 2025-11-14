@@ -12,3 +12,18 @@ C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\refint\LibApp.dll
 C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.pdb
 C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\LibApp.genruntimeconfig.cache
 C:\Users\sergi\Downloads\Library\LibApp\obj\Debug\net9.0\ref\LibApp.dll
+D:\Current Projects\C#\VB-Library\LibApp\bin\Debug\net9.0\LibApp.exe
+D:\Current Projects\C#\VB-Library\LibApp\bin\Debug\net9.0\LibApp.deps.json
+D:\Current Projects\C#\VB-Library\LibApp\bin\Debug\net9.0\LibApp.runtimeconfig.json
+D:\Current Projects\C#\VB-Library\LibApp\bin\Debug\net9.0\LibApp.dll
+D:\Current Projects\C#\VB-Library\LibApp\bin\Debug\net9.0\LibApp.pdb
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.AssemblyInfoInputs.cache
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.AssemblyInfo.cs
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.csproj.CoreCompileInputs.cache
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.sourcelink.json
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.dll
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\refint\LibApp.dll
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.pdb
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\LibApp.genruntimeconfig.cache
+D:\Current Projects\C#\VB-Library\LibApp\obj\Debug\net9.0\ref\LibApp.dll

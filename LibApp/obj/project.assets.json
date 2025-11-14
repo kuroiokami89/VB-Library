@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sergi\\Downloads\\Library\\LibApp\\LibApp.csproj",
+      "projectUniqueName": "D:\\Current Projects\\C#\\VB-Library\\LibApp\\LibApp.csproj",
       "projectName": "LibApp",
-      "projectPath": "C:\\Users\\sergi\\Downloads\\Library\\LibApp\\LibApp.csproj",
+      "projectPath": "D:\\Current Projects\\C#\\VB-Library\\LibApp\\LibApp.csproj",
       "packagesPath": "C:\\Users\\sergi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sergi\\Downloads\\Library\\LibApp\\obj\\",
+      "outputPath": "D:\\Current Projects\\C#\\VB-Library\\LibApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\sergi\\AppData\\Roaming\\NuGet\\NuGet.Config"
