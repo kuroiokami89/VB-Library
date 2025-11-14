@@ -21,13 +21,7 @@ A lightweight, console-based library management application built with **C# .NET
 LibApp/
 ├── Models/
 │   ├── Book.cs           # Book entity with title, author, genre, price, copies
-│   ├── Shelf.cs          # Generic shelf container for books with search/filter methods
-│   ├── Client.cs         # (Placeholder) Client entity for future loan tracking
-│   └── Loan.cs           # (Placeholder) Loan entity for future borrowing system
-├── Services/
-│   ├── BookService.cs    # (Commented) Service layer for book operations
-│   ├── ClientService.cs  # (Commented) Service layer for client management
-│   └── LoanService.cs    # (Commented) Service layer for loan management
+│   └── Shelf.cs          # Generic shelf container for books with search/filter methods
 ├── Program.cs            # Main console application entry point and UI logic
 ├── LibApp.csproj         # Project file (targets .NET 9.0)
 └── README.md             # This file
@@ -149,10 +143,10 @@ Enter Book Title to Find: 1984
 
 ## 🔮 Future Enhancements
 
-The project includes placeholder structures and commented services for planned features:
+The project is designed for easy expansion with planned features:
 
-- ✅ **Loan/Borrow System** — Track book borrowing and returns via `Loan` and `LoanService`.
-- ✅ **Client Management** — Manage library members via `Client` and `ClientService`.
+- ✅ **Loan/Borrow System** — Track book borrowing and returns.
+- ✅ **Client Management** — Manage library members and their accounts.
 - ✅ **Persistence** — Save/load library data to JSON or database.
 - ✅ **Advanced Filtering** — More refined search options (author, multiple genres, availability).
 - ✅ **Bulk Operations** — Import/export books in bulk (CSV, JSON).
