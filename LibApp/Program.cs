@@ -9,21 +9,24 @@ namespace LibApp
 
         static void Main()
         {
-            Console.Title = "📚 VB Library System";
+            Console.Title = "VANTABLACK // Cyberpunk Library System";
             Console.CursorVisible = false;
+
+            CyberpunkBoot();
+            SplashVantablack();
 
             while (true)
             {
                 Console.Clear();
-                DrawFrame("📚 VB LIBRARY SYSTEM");
+                DrawFrame("⧉ CYBER LIBRARY INTERFACE // VANTABLACK");
 
-                WriteOption("1", "📖 Add Book", ConsoleColor.Green);
+                WriteOption("1", "➕ Add Book", ConsoleColor.Magenta);
                 WriteOption("2", "📚 View All Books", ConsoleColor.Cyan);
                 WriteOption("3", "🔍 Find Book", ConsoleColor.Yellow);
-                WriteOption("4", "❌ Exit", ConsoleColor.Red);
+                WriteOption("4", "⛔ Exit", ConsoleColor.Red);
 
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("\n👉 Choose an option: ");
+                Console.Write("\n> INPUT: ");
                 var choice = Console.ReadLine();
 
                 switch (choice)
@@ -34,7 +37,7 @@ namespace LibApp
                     case "4": Exit(); break;
 
                     default:
-                        Warning("Invalid choice! Press any key...");
+                        Warning("System Error: Invalid Option.");
                         Console.ReadKey();
                         break;
                 }
@@ -42,42 +45,102 @@ namespace LibApp
         }
 
 
-        // ---------------------- MENU ACTIONS ----------------------
+
+        // ======================================================
+        // 🟣 CYBERPUNK BOOT + SPLASH
+        // ======================================================
+
+        static void CyberpunkBoot()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+
+            string[] boot = {
+                "BOOTING VANTABLACK OS █▒▒▒▒▒▒▒▒▒",
+                "LOADING NEON MODULES ███▒▒▒▒▒▒▒",
+                "ESTABLISHING SECURE LINK ███████▒▒▒",
+                "SYNCING CONSOLE INTERFACE ██████████",
+                "STATUS: ONLINE"
+            };
+
+            foreach (var line in boot)
+            {
+                Console.WriteLine(line);
+                Thread.Sleep(180);
+            }
+
+            Thread.Sleep(300);
+        }
+
+        static void SplashVantablack()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            string[] splash =
+            {
+                "██╗   ██╗ █████╗ ███╗   ██╗████████╗ █████╗ ██████╗ ██╗      █████╗  ██████╗██╗  ██╗",
+                "██║   ██║██╔══██╗████╗  ██║╚══██╔══╝██╔══██╗██╔══██╗██║     ██╔══██╗██╔════╝██║ ██╔╝",
+                "██║   ██║███████║██╔██╗ ██║   ██║   ███████║██████╔╝██║     ███████║██║     █████╔╝ ",
+                "╚██╗ ██╔╝██╔══██║██║╚██╗██║   ██║   ██╔══██║██╔══██╗██║     ██╔══██║██║     ██╔═██╗ ",
+                " ╚████╔╝ ██║  ██║██║ ╚████║   ██║   ██║  ██║██║  ██║███████╗██║  ██║╚██████╗██║  ██╗",
+                "  ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝",
+                "                               V A N T A B L A C K  //  S Y S T E M"
+            };
+
+            foreach (string line in splash)
+            {
+                Console.WriteLine(line);
+                Thread.Sleep(40);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\nINITIALIZING MODULES...\n");
+            Thread.Sleep(600);
+
+            Console.ResetColor();
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+
+
+        // ======================================================
+        // 🟣 MENU ACTIONS (unchanged, only UI enhanced)
+        // ======================================================
+
         static void AddBook()
         {
             Console.Clear();
             DrawFrame("➕ ADD NEW BOOK");
 
-            string title = Prompt("📘 Book Title");
+            string title = Prompt("📘 Title");
             string author = Prompt("✍️ Author");
             string genre = Prompt("🏷️ Genre");
             decimal price = PromptDecimal("💸 Price (€)");
-            int copies = PromptInt("📦 Number of copies");
+            int copies = PromptInt("📦 Copies");
 
             var book = new Book(nextBookId++, title, author, genre, price, copies);
             shelf.Add(book);
 
-            Success($"\n✔️ Book '{title}' added successfully!");
+            Success($"\n✔️ Book '{title}' uploaded to database.");
             PressToContinue();
         }
 
         static void ViewBooks()
         {
             Console.Clear();
-            DrawFrame("📚 ALL BOOKS");
+            DrawFrame("📚 DATABASE — ALL BOOKS");
 
             var books = shelf.GetAll();
 
-            if (!books.Any())
-            {
-                Warning("No books found.");
-            }
+            if (!books.Any()) Warning("No data available.");
             else
             {
-                foreach (var book in books)
+                foreach (var b in books)
                 {
-                    RainbowWrite($"📘 ID {book.Id} — {book.Title}");
-                    book.DisplayInfo();
+                    GlitchWrite($"ID {b.Id}  //  {b.Title}");
+                    b.DisplayInfo();
                     Console.WriteLine();
                 }
             }
@@ -88,18 +151,18 @@ namespace LibApp
         static void FindBook()
         {
             Console.Clear();
-            DrawFrame("🔍 FIND A BOOK");
+            DrawFrame("🔍 SEARCH DATABASE");
 
-            string title = Prompt("🔎 Enter title");
+            string title = Prompt("🔎 Enter Title");
 
             var found = shelf.Find(title);
 
             if (found != null)
             {
-                Success("\n📗 Book Found:");
+                Success("\n📗 MATCH FOUND:");
                 found.DisplayInfo();
             }
-            else Warning("\n❌ Book not found.");
+            else Warning("\n❌ No match in database.");
 
             PressToContinue();
         }
@@ -107,21 +170,26 @@ namespace LibApp
         static void Exit()
         {
             Console.Clear();
-            DrawFrame("👋 EXITING SYSTEM");
-            Console.WriteLine("Thanks for using VB Library!");
+            DrawFrame("SYSTEM SHUTDOWN");
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("Closing VANTABLACK Interface...");
+            Thread.Sleep(800);
+
             Environment.Exit(0);
         }
 
 
 
-        // ---------------------- UI HELPERS ----------------------
+        // ======================================================
+        // 🟣 UI HELPERS — ALL CYBERPUNKIZED
+        // ======================================================
 
-        // Fancy box frame
         static void DrawFrame(string title)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
+            string border = new string('═', title.Length + 10);
 
-            string border = new string('═', title.Length + 6);
             Console.WriteLine($"╔{border}╗");
             Console.WriteLine($"║   {title}   ║");
             Console.WriteLine($"╚{border}╝\n");
@@ -132,26 +200,25 @@ namespace LibApp
         static void WriteOption(string number, string text, ConsoleColor color)
         {
             Console.ForegroundColor = color;
-            Console.Write($" {number}. ");
+            Console.Write($" [{number}] ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(text);
         }
 
-        static void RainbowWrite(string text)
+        static void GlitchWrite(string text)
         {
-            ConsoleColor[] colors = 
-            {
-                ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow,
-                ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Blue
+            var glitchColors = new[] {
+                ConsoleColor.Magenta, ConsoleColor.Cyan, ConsoleColor.DarkMagenta,
+                ConsoleColor.Blue, ConsoleColor.DarkCyan
             };
 
-            int i = 0;
-            foreach (char c in text)
+            var rnd = new Random();
+
+            foreach (var c in text)
             {
-                Console.ForegroundColor = colors[i % colors.Length];
+                Console.ForegroundColor = glitchColors[rnd.Next(glitchColors.Length)];
                 Console.Write(c);
-                i++;
-                Thread.Sleep(5); // slight animation
+                Thread.Sleep(6);
             }
 
             Console.ResetColor();
@@ -175,14 +242,14 @@ namespace LibApp
         static void PressToContinue()
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("\nPress any key to continue...");
+            Console.WriteLine("\n> Press any key to continue...");
             Console.ResetColor();
             Console.ReadKey();
         }
 
         static string Prompt(string label)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write($"{label}: ");
             Console.ResetColor();
             return Console.ReadLine() ?? "";
@@ -190,7 +257,7 @@ namespace LibApp
 
         static decimal PromptDecimal(string label)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write($"{label}: ");
             Console.ResetColor();
 
@@ -199,7 +266,7 @@ namespace LibApp
 
         static int PromptInt(string label)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.Write($"{label}: ");
             Console.ResetColor();
 
