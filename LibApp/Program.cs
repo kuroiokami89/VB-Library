@@ -1,136 +1,209 @@
 ﻿using LibApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace LibApp
 {
     class Program
     {
-        static Shelf<Book> shelf = new Shelf<Book>();
-        static int nextBookId = 1;
+        private static readonly Shelf<Book> shelf = new();
+        private static int nextBookId = 1;
 
-        /// Main program loop that displays the menu and processes user input.
         static void Main()
         {
             Console.Title = "📚 VB Library System";
+            Console.CursorVisible = false;
 
             while (true)
             {
-                Console.Clear(); // Clear the console for better readability
-                Console.WriteLine("===== 📚 VB LIBRARY CONSOLE ====="); // Title
-                Console.WriteLine("1. Add Book");
-                Console.WriteLine("2. View All Books");
-                Console.WriteLine("3. Find Book");
-                Console.WriteLine("4. Exit");
-                Console.Write("\nChoose an option: ");
+                Console.Clear();
+                DrawFrame("📚 VB LIBRARY SYSTEM");
 
-                string? choice = Console.ReadLine(); // Add ? to make it nullable
+                WriteOption("1", "📖 Add Book", ConsoleColor.Green);
+                WriteOption("2", "📚 View All Books", ConsoleColor.Cyan);
+                WriteOption("3", "🔍 Find Book", ConsoleColor.Yellow);
+                WriteOption("4", "❌ Exit", ConsoleColor.Red);
 
-                if (choice == "1")
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("\n👉 Choose an option: ");
+                var choice = Console.ReadLine();
+
+                switch (choice)
                 {
-                    AddBook();
-                }
-                else if (choice == "2")
-                {
-                    ViewBooks();
-                }
-                else if (choice == "3")
-                {
-                    FindBook();
-                }
-                else if (choice == "4")
-                {
-                    break;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid choice! Press any key...");
-                    Console.ReadKey();
+                    case "1": AddBook(); break;
+                    case "2": ViewBooks(); break;
+                    case "3": FindBook(); break;
+                    case "4": Exit(); break;
+
+                    default:
+                        Warning("Invalid choice! Press any key...");
+                        Console.ReadKey();
+                        break;
                 }
             }
         }
 
-        /// Adds a new book to the library.
-        /// This method prompts the user to enter the book's title, author, and number of copies.
-        /// It then creates a new Book object and adds it to the Shelf.
+
+        // ---------------------- MENU ACTIONS ----------------------
         static void AddBook()
         {
             Console.Clear();
-            Console.WriteLine("=== ADD NEW BOOK ===");
+            DrawFrame("➕ ADD NEW BOOK");
 
-            Console.Write("Book Title: ");
-            string title = Console.ReadLine() ?? ""; // Use ?? to handle null
+            string title = Prompt("📘 Book Title");
+            string author = Prompt("✍️ Author");
+            string genre = Prompt("🏷️ Genre");
+            decimal price = PromptDecimal("💸 Price (€)");
+            int copies = PromptInt("📦 Number of copies");
 
-            Console.Write("Author: ");
-            string author = Console.ReadLine() ?? ""; // Use ?? to handle null
+            var book = new Book(nextBookId++, title, author, genre, price, copies);
+            shelf.Add(book);
 
-            Console.Write("Genre: ");
-            string genre = Console.ReadLine() ?? ""; // Handle null input
-
-            Console.Write("Price: ");
-            string priceInput = Console.ReadLine() ?? "0"; // Handle null input
-            decimal price = decimal.TryParse(priceInput, out decimal p) ? p : 0; //Parsing of the string from priceInput to a float
-
-            Console.Write("Number of copies: ");
-            string copiesInput = Console.ReadLine() ?? "1"; // Handle null input
-            int copies = int.TryParse(copiesInput, out int c) ? c : 1; //Parsing of the string from copiesInput to an integer
-
-            // Create and add the book using your existing Book class
-            Book newBook = new Book(nextBookId++, title, author, genre, price, copies);
-            shelf.Add(newBook);
-
-            Console.WriteLine($"\n✅ Book '{title}' added successfully!");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            Success($"\n✔️ Book '{title}' added successfully!");
+            PressToContinue();
         }
 
-        /// Views all books in the library.
-        /// This method displays all books in the library, including their title, author, and number of copies.
-        /// It will also display a message if there are no books in the library.
         static void ViewBooks()
         {
             Console.Clear();
-            Console.WriteLine("=== ALL BOOKS ===");
-            var allBooks = shelf.GetAll();
-            if (!allBooks.Any())
+            DrawFrame("📚 ALL BOOKS");
+
+            var books = shelf.GetAll();
+
+            if (!books.Any())
             {
-                Console.WriteLine("No books in the library.");
+                Warning("No books found.");
             }
             else
             {
-                foreach (Book book in allBooks)
+                foreach (var book in books)
                 {
+                    RainbowWrite($"📘 ID {book.Id} — {book.Title}");
                     book.DisplayInfo();
+                    Console.WriteLine();
                 }
             }
-            Console.WriteLine("\nPress any key to continue...");
-            Console.ReadKey();
+
+            PressToContinue();
         }
 
-        /// Finds and displays a book from the library by title.
-        /// If a book is found, it displays the book's information or it displays a message indicating that the book was not found.
         static void FindBook()
         {
             Console.Clear();
-            Console.WriteLine("=== FIND A BOOK ===");
+            DrawFrame("🔍 FIND A BOOK");
 
-            Console.Write("Enter Book Title to Find: ");
-            string title = Console.ReadLine() ?? "";
+            string title = Prompt("🔎 Enter title");
 
-            Book? foundBook = shelf.Find(title);
-            if (foundBook != null)
+            var found = shelf.Find(title);
+
+            if (found != null)
             {
-                Console.WriteLine("\n✅ Book Found:");
-                foundBook.DisplayInfo();
+                Success("\n📗 Book Found:");
+                found.DisplayInfo();
             }
-            else
+            else Warning("\n❌ Book not found.");
+
+            PressToContinue();
+        }
+
+        static void Exit()
+        {
+            Console.Clear();
+            DrawFrame("👋 EXITING SYSTEM");
+            Console.WriteLine("Thanks for using VB Library!");
+            Environment.Exit(0);
+        }
+
+
+
+        // ---------------------- UI HELPERS ----------------------
+
+        // Fancy box frame
+        static void DrawFrame(string title)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+
+            string border = new string('═', title.Length + 6);
+            Console.WriteLine($"╔{border}╗");
+            Console.WriteLine($"║   {title}   ║");
+            Console.WriteLine($"╚{border}╝\n");
+
+            Console.ResetColor();
+        }
+
+        static void WriteOption(string number, string text, ConsoleColor color)
+        {
+            Console.ForegroundColor = color;
+            Console.Write($" {number}. ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(text);
+        }
+
+        static void RainbowWrite(string text)
+        {
+            ConsoleColor[] colors = 
             {
-                Console.WriteLine("\n❌ Book not found.");
+                ConsoleColor.Red, ConsoleColor.Magenta, ConsoleColor.Yellow,
+                ConsoleColor.Green, ConsoleColor.Cyan, ConsoleColor.Blue
+            };
+
+            int i = 0;
+            foreach (char c in text)
+            {
+                Console.ForegroundColor = colors[i % colors.Length];
+                Console.Write(c);
+                i++;
+                Thread.Sleep(5); // slight animation
             }
 
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+
+        static void Success(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+
+        static void Warning(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(msg);
+            Console.ResetColor();
+        }
+
+        static void PressToContinue()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("\nPress any key to continue...");
+            Console.ResetColor();
             Console.ReadKey();
+        }
+
+        static string Prompt(string label)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{label}: ");
+            Console.ResetColor();
+            return Console.ReadLine() ?? "";
+        }
+
+        static decimal PromptDecimal(string label)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{label}: ");
+            Console.ResetColor();
+
+            return decimal.TryParse(Console.ReadLine(), out var val) ? val : 0;
+        }
+
+        static int PromptInt(string label)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{label}: ");
+            Console.ResetColor();
+
+            return int.TryParse(Console.ReadLine(), out var val) ? val : 0;
         }
     }
 }

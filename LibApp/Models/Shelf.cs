@@ -1,6 +1,10 @@
+using System.Collections.Generic;
+using System.Linq;
+
 namespace LibApp.Models
 {
-    public class Shelf<T> where T : Book 
+    public class Shelf<T>
+        where T : Book
     {
         private List<T> books = new List<T>();
 
@@ -48,15 +52,6 @@ namespace LibApp.Models
         public IEnumerable<T> GetByPriceRange(decimal minPrice, decimal maxPrice)
         {
             return books.Where(b => b.Price >= minPrice && b.Price <= maxPrice);
-        }
-
-        /// Prints a list of all books currently on the shelf to the console.
-        public void PrintBooks()
-        {
-            foreach (var book in books)
-            {
-                Console.WriteLine(book);
-            }
         }
     }
 }
